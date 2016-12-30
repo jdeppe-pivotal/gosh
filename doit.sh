@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 #!/usr/local/bin/dumb-init /bin/bash
 
 set -e -x
