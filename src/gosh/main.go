@@ -7,7 +7,6 @@ import (
 	"os"
 	"log"
 	"strconv"
-	"time"
 )
 
 func main() {
@@ -41,5 +40,5 @@ func main() {
 		fmt.Printf("% 4d >> date: %s", i, dateBytes)
 	}
 
-	time.Sleep(60 * time.Second)
+	//time.Sleep(60 * time.Second)
 }
