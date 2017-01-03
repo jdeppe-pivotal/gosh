@@ -2,7 +2,7 @@
 
 #!/usr/local/bin/dumb-init /bin/bash
 
-set -e -x
+set -x
 
 WORKDIR=$( cd $(dirname $0); pwd )
 
