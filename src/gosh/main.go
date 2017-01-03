@@ -12,6 +12,7 @@ import (
 	"path"
 	"bufio"
 	"bytes"
+	"syscall"
 )
 
 func main() {
@@ -56,8 +57,7 @@ func main() {
 		for scanner.Scan() {
 			fmt.Printf("% 4d >> output: %s\n", i, scanner.Text())
 		}
-
 	}
 
-	//time.Sleep(60 * time.Second)
+	syscall.Kill(os.Getpid(), syscall.SIGKILL)
 }
