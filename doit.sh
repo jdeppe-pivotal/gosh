@@ -8,5 +8,5 @@ WORKDIR=$( cd $(dirname $0); pwd )
 
 pushd $WORKDIR
   GOPATH=$PWD go build gosh
-  ./gosh 20
+  ./gosh 200
 popd
