@@ -7,6 +7,11 @@ import (
 	"os"
 	"log"
 	"strconv"
+	"github.com/kardianos/osext"
+	"path/filepath"
+	"path"
+	"bufio"
+	"bytes"
 )
 
 func main() {
@@ -20,16 +25,26 @@ func main() {
 	}
 
 	for i := 0; i < count; i++ {
-		dateCmd := exec.Command("date")
+		phantomPath, err := exec.LookPath("phantomjs")
+		if err != nil {
+			log.Fatal("Could not find phantomjs in PATH")
+		}
 
-		dateOut, err := dateCmd.StdoutPipe()
+		filename, _ := osext.Executable()
+		workDir := filepath.Dir(filename)
+
+		testJs := path.Join(workDir, "test.js")
+
+		cmd := exec.Command(phantomPath, testJs)
+
+		cmdOut, err := cmd.StdoutPipe()
 		if err != nil {
 			panic(err)
 		}
 
-		dateCmd.Start()
+		cmd.Start()
 
-		dateBytes, err := ioutil.ReadAll(dateOut)
+		dateBytes, err := ioutil.ReadAll(cmdOut)
 		if err != nil {
 			panic(err)
 		}
@@ -37,7 +52,11 @@ func main() {
 		// This will reap the child
 		//dateCmd.Wait()
 
-		fmt.Printf("% 4d >> date: %s", i, dateBytes)
+		scanner := bufio.NewScanner(bytes.NewReader(dateBytes))
+		for scanner.Scan() {
+			fmt.Printf("% 4d >> output: %s\n", i, scanner.Text())
+		}
+
 	}
 
 	//time.Sleep(60 * time.Second)
