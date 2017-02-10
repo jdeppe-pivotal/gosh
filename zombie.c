@@ -13,5 +13,5 @@ int main(int argc, char ** argv) {
         exit(0);
     }
     printf("got pid %d and exited\n", pid);
-    // sleep(20);
+    sleep(20);
 }
