@@ -7,6 +7,10 @@ set -x
 WORKDIR=$( cd $(dirname $0); pwd )
 
 pushd $WORKDIR
-  GOPATH=$PWD go build gosh
-  ./gosh 200
+  gcc -o zombie zombie.c
+  X=0
+  while [ $X -lt $1 ]; do
+    ./zombie
+    ((X = X + 1))
+  done
 popd
