@@ -10,8 +10,7 @@ pushd $WORKDIR
   gcc -o zombie zombie.c
   X=0
   while [ $X -lt $1 ]; do
-    ./zombie &
-    kill -9 $!
+    ./zombie
     ((X = X + 1))
   done
 popd
